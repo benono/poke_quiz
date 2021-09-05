@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="id" />
+        <button @click="searchPokemonFromId(id)">ポケモンゲット</button>
+        {{ searchResults }}
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    id: "",
+                    searchResults: [],
+                };
+            },
+            methods: {
+                async searchPokemonFromId(id) {
+                    this.searchResults = [];
+                    const baseURL = "https://pokeapi.co/api/v2/pokemon-species/";
+                    console.log(baseURL + this.id);
+
+                    const response = await fetch(baseURL + this.id)
+                        .then(response => response.json())
+                    console.log(response)
+                    this.searchResults.push({
+                        name: response.names[0].name,
+                        img: this.id,
+                        flavor_text: response.flavor_text_entries[22].flavor_text
+                    })
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>
