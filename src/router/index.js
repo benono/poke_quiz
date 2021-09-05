@@ -1,23 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import PokeIndex from '@/pages/PokeIndex'
+import PokeQuiz from '@/pages/PokeQuiz'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'PokeIndex',
+    component: PokeIndex
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/quiz',
+    name: 'PokeQuiz',
+    component: PokeQuiz
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
+
 ]
 
 const router = new VueRouter({
